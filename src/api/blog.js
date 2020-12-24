@@ -4,7 +4,7 @@ import axios from 'axios'
 export const createBlog = (user, form) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/create-blog/',
+    url: apiUrl + '/blog_posts/',
     headers: {
       Authorization: `Token ${user.token}`
     },
@@ -13,6 +13,16 @@ export const createBlog = (user, form) => {
         place: form.place,
         description: form.description
       }
+    }
+  })
+}
+
+export const indexBlog = user => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/blog_posts/',
+    headers: {
+      Authorization: `Token ${user.token}`
     }
   })
 }

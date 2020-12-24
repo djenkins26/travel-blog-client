@@ -1,6 +1,6 @@
 #!/bin/bash
 API="https://travel-blogpost-api.herokuapp.com/"
-URL_PATH="/create-blog"
+URL_PATH="/blog_posts/"
 curl "${API}${URL_PATH}" \
 --include \
 --request POST \
