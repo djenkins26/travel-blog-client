@@ -41,7 +41,7 @@ class BlogCreate extends Component {
 
     createBlog(this.state, user)
       .then(() => msgAlert({
-        heading: 'Change Password Success',
+        heading: 'Create Blog Success',
         message: messages.createBlogSuccess,
         variant: 'success'
       }))
