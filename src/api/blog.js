@@ -26,3 +26,13 @@ export const indexBlog = user => {
     }
   })
 }
+
+export const showBlog = (user, id) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/blog_posts/' + id,
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}

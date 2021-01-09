@@ -37,19 +37,24 @@ class BlogCreate extends Component {
   onCreateBlog = event => {
     event.preventDefault()
 
-    const { msgAlert, user } = this.props
+    const { msgAlert, user, history } = this.props
 
     createBlog(this.state, user)
+      .then(res => user(res.data.user))
       .then(() => msgAlert({
         heading: 'Create Blog Success',
         message: messages.createBlogSuccess,
         variant: 'success'
       }))
-      .catch(error => msgAlert({
-        heading: 'Create blog failed with error: ' + error.message,
-        message: messages.changePasswordFailure,
-        variant: 'danger'
-      }))
+      .then(() => history.push('/blog_posts_index'))
+      .catch(error => {
+        this.setState({ place: '', description: '' })
+        msgAlert({
+          heading: 'Create blog failed with error: ' + error.message,
+          message: messages.createBlogFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   handleSubmit = event => {
@@ -72,7 +77,7 @@ class BlogCreate extends Component {
     const { createdBlogId, blog } = this.state
 
     if (createdBlogId) {
-      return <Redirect to={`/blog_posts/${createdBlogId}`} />
+      return <Redirect to={`/blog_posts_index/${createdBlogId}`} />
     }
 
     return (

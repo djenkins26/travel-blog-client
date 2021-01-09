@@ -35,7 +35,7 @@ class BlogsIndex extends Component {
     } else {
       blogs = this.state.blogs.map(blog => (
         <li key={blog.id}>
-          <Link to={`/blog_posts/${blog.id}`}>{blog.place}</Link>
+          <Link to={`/blog_posts_show/${blog.id}`}>{blog.place}</Link>
         </li>
       ))
     }

@@ -13,7 +13,7 @@ import LandingPage from './LandingPage/LandingPage'
 
 import BlogCreate from './components/BlogCreate/BlogCreate'
 import BlogsIndex from './components/BlogsIndex/BlogsIndex'
-// import BlogShow from './components/BlogShow/BlogShow'
+import BlogShow from './components/BlogShow/BlogShow'
 
 class App extends Component {
   constructor () {
@@ -74,10 +74,13 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/blog_posts/' render={() => (
-            <BlogCreate user={user}/>
+            <BlogCreate msgAlert={this.msgAlert} user={user}/>
           )} />
-          <AuthenticatedRoute user={user} path='/blog_posts/' render={() => (
+          <AuthenticatedRoute user={user} path='/blog_posts_index/' render={() => (
             <BlogsIndex user={user}/>
+          )} />
+          <AuthenticatedRoute user={user} path='/blog_posts_show/:id' render={() => (
+            <BlogShow user={user} msgAlert={this.msgAlert} />
           )} />
         </main>
       </Fragment>
