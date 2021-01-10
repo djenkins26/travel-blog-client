@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { createBlog } from '../../api/blog'
+// import { createBlog } from '../../api/blog'
 import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
@@ -34,31 +34,32 @@ class BlogCreate extends Component {
     })
   }
 
-  onCreateBlog = event => {
-    event.preventDefault()
-
-    const { msgAlert, user, history } = this.props
-
-    createBlog(this.state, user)
-      .then(res => user(res.data.user))
-      .then(() => msgAlert({
-        heading: 'Create Blog Success',
-        message: messages.createBlogSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/blog_posts_index'))
-      .catch(error => {
-        this.setState({ place: '', description: '' })
-        msgAlert({
-          heading: 'Create blog failed with error: ' + error.message,
-          message: messages.createBlogFailure,
-          variant: 'danger'
-        })
-      })
-  }
+  // onCreateBlog = event => {
+  //   event.preventDefault()
+  //
+  //   const { msgAlert, user, history } = this.props
+  //
+  //   createBlog(this.state, user)
+  //     .then(res => user(res.data.user))
+  //     .then(() => msgAlert({
+  //       heading: 'Create Blog Success',
+  //       message: messages.createBlogSuccess,
+  //       variant: 'success'
+  //     }))
+  //     .then(() => history.push('/blog_posts_index'))
+  //     .catch(error => {
+  //       this.setState({ place: '', description: '' })
+  //       msgAlert({
+  //         heading: 'Create blog failed with error: ' + error.message,
+  //         message: messages.createBlogFailure,
+  //         variant: 'danger'
+  //       })
+  //     })
+  // }
 
   handleSubmit = event => {
     event.preventDefault()
+    const { msgAlert } = this.props
 
     axios({
       url: `${apiUrl}/blog_posts/`,
@@ -69,6 +70,19 @@ class BlogCreate extends Component {
       data: { blog: this.state.blog }
     })
       .then(res => this.setState({ createdBlogId: res.data.blog._id }))
+      .then(() => msgAlert({
+        heading: 'Create Blog Success',
+        message: messages.createBlogSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ place: '', description: '' })
+        msgAlert({
+          heading: 'Create blog failed with error: ' + error.message,
+          message: messages.createBlogFailure,
+          variant: 'danger'
+        })
+      })
       .catch(console.error)
   }
 
@@ -77,7 +91,7 @@ class BlogCreate extends Component {
     const { createdBlogId, blog } = this.state
 
     if (createdBlogId) {
-      return <Redirect to={`/blog_posts_index/${createdBlogId}`} />
+      return <Redirect to={'/blog_posts_index/'} />
     }
 
     return (
@@ -92,4 +106,4 @@ class BlogCreate extends Component {
     )
   }
 }
-export default BlogCreate
+export default withRouter(BlogCreate)

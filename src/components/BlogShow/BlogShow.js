@@ -5,7 +5,7 @@ import messages from '../AutoDismissAlert/messages'
 
 // import { showBlog } from '../../api/blog'
 import apiUrl from '../../apiConfig'
-import Layout from '../../components/BlogCreate/Layout'
+// import Layout from '../../components/BlogCreate/Layout'
 
 class BlogShow extends Component {
   constructor (props) {
@@ -60,11 +60,25 @@ class BlogShow extends Component {
   }
 
 destroy = () => {
+  const { msgAlert, user } = this.props
   axios({
-    url: `${apiUrl}/blog_posts/${this.props.match.params.id}`,
+    url: `${apiUrl}/blog_posts/${this.props.match.params.id}/`,
+    headers: {
+      'Authorization': `Token ${user.token}`
+    },
     method: 'DELETE'
   })
     .then(() => this.setState({ deleted: true }))
+    .then(() => msgAlert({
+      heading: 'Delete Blog Success',
+      message: messages.deleteBlogSuccess,
+      variant: 'success'
+    }))
+    .catch(error => msgAlert({
+      heading: 'Delete blog failed with error: ' + error.message,
+      message: messages.deleteBlogFailure,
+      variant: 'danger'
+    }))
     .catch(console.error)
 }
 
@@ -77,20 +91,20 @@ render () {
 
   if (deleted) {
     return <Redirect to={
-      { pathname: '/', state: { msg: 'Blog successfully deleted!' } }
+      { pathname: '/blog_posts_index', state: { msg: 'Blog successfully deleted!' } }
     } />
   }
 
   return (
-    <Layout>
+    <div>
       <h4>{blog.place}</h4>
       <p>Description: {blog.description}</p>
       <button onClick={this.destroy}>Delete Blog</button>
-      <Link to={`/blog_posts_show/${this.props.match.params.id}/edit`}>
-        <botton>Edit</botton>
+      <Link to={`/blog_posts_edit/${this.props.match.params.id}/`}>
+        <button>Edit</button>
       </Link>
-      <Link to='/blog_posts'>Back to blog posts</Link>
-    </Layout>
+      <Link to='/blog_posts_index'>Back to blog posts</Link>
+    </div>
   )
 }
 }

@@ -42,7 +42,7 @@ class BlogsIndex extends Component {
 
     return (
       <div>
-        <h2>Blog Posts</h2>
+        <h1>Blog Posts</h1>
         {blogs}
       </div>
     )

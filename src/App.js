@@ -14,6 +14,7 @@ import LandingPage from './LandingPage/LandingPage'
 import BlogCreate from './components/BlogCreate/BlogCreate'
 import BlogsIndex from './components/BlogsIndex/BlogsIndex'
 import BlogShow from './components/BlogShow/BlogShow'
+import BlogUpdate from './components/BlogUpdate/BlogUpdate'
 
 class App extends Component {
   constructor () {
@@ -73,14 +74,17 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/blog_posts/' render={() => (
+          <AuthenticatedRoute user={user} path='/blog_posts' render={() => (
             <BlogCreate msgAlert={this.msgAlert} user={user}/>
           )} />
-          <AuthenticatedRoute user={user} path='/blog_posts_index/' render={() => (
+          <AuthenticatedRoute user={user} path='/blog_posts_index' render={() => (
             <BlogsIndex user={user}/>
           )} />
           <AuthenticatedRoute user={user} path='/blog_posts_show/:id' render={() => (
             <BlogShow user={user} msgAlert={this.msgAlert} />
+          )} />
+          <AuthenticatedRoute user={user} path='/blog_posts_edit/:id' render={() => (
+            <BlogUpdate user={user} msgAlert={this.msgAlert} />
           )} />
         </main>
       </Fragment>
