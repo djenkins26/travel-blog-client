@@ -59,6 +59,7 @@ class BlogCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    event.target.reset()
     const { msgAlert } = this.props
 
     axios({
