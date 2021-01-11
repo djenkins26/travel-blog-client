@@ -7,10 +7,10 @@ This application uses React to create, show, update, and delete a travel blog. O
 [Deployed Client] https://djenkins26.github.io/travel-blog-client/
 
 ## Planning Story
-I created a blogcreate.js file to handle my class then added authenticated routes to my app.js file. When reviewing notes I noticed I needed blogform, footer, and layout files to import into my blogcreate.js file. After I was able to create a blog and set up index, I moved on to styling the landing page. Next I plan on working on show, update, and delete. My problem solving strategies included researching on the web on how to fix errors, reviewing materials, and asking for help.
+I created a blogcreate.js file to handle my class then added authenticated routes to my app.js file. When reviewing notes I decided to create blogform, footer, and layout files to import into my blogcreate.js and blogupdate files. After I was able to create a blog and set up index, I moved on to styling the landing page. Next I worked on show, update, and delete. My problem solving strategies included researching on the web on how to fix errors, reviewing materials, and asking for help.
 
 ### Unsolved Problems
-I would like to finish create by resetting the forms and having the blog link show up in real time in my index. I also need to add success and failure messages. As stated previously, I will be adding show, update, and delete. My strech goals are to see all blogs from other users and upload images.
+When creeating a new blog I would like to redirect to the index page to show the neewly created blog. My strech goals are to see all blogs from other users and upload images.
 
 ### User Stories
 As a user I want to sign up/sign in
