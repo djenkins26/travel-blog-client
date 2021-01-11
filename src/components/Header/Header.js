@@ -30,11 +30,6 @@ const Header = ({ user }) => (
   <Navbar className="my-navbar" variant="dark" expand="md">
     <Navbar.Brand className="brand-name" href="#">
       Travel Bug
-      <img
-        src='img src="https://img.icons8.com/android/24/000000/insect.png"'
-        alt=''
-        className='navbar-image'
-      />
 
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
